@@ -1,13 +1,21 @@
+/* Made by Mr.Epoch as my practice of factory functions and modules in Odin project */
+
+/*   * and html, body turns of some initial browser settings  */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* I define some color variables here */
+
 :root {
   --color-player-1: #bef264;
   --color-player-2: #ef4444d2;
   --color-tie: #a1a1aa;
+  --color-body-background: #94a3b861;
+  --color-board-background: #f1f5f9;
 }
 
 html,
@@ -18,12 +26,16 @@ body {
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+/* I made whole body be flex and made it centered, background color is in root */
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #94a3b861;
+  background-color: var(--color-body-background);
 }
+
+/* board class is my board on which will be each block, it is grid 3x3, background color is in root*/
 
 .board {
   height: 70%;
@@ -31,8 +43,10 @@ body {
   border: 2px solid rgba(0, 0, 0, 0.553);
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-  background-color: #f1f5f9;
+  background-color: var(--color-board-background);
 }
+
+/* Each board block has thin 1px border, it is centered flex for incoming gaming objects */
 
 .board > div {
   border: 1px solid rgba(0, 0, 0, 0.553);
@@ -43,9 +57,13 @@ body {
   align-items: center;
 }
 
+/* When hovered, it will turn pure white color */
+
 .board > div:hover {
   background-color: #fff;
 }
+
+/* After and before board is a what objects represents and their color */
 
 .board::after {
   background-color: var(--color-player-2);
@@ -63,6 +81,8 @@ body {
   left: 100px;
 }
 
+/* This will be displayed on body element when player 1 won, color in root */
+
 .win {
   height: 70%;
   width: 50%;
@@ -74,6 +94,8 @@ body {
   border: 2px solid rgba(0, 0, 0, 0.553);
   background-color: var(--color-player-1);
 }
+
+/* This will be displayed on body element when player 2 won, color in root */
 
 .win2 {
   height: 70%;
@@ -87,6 +109,8 @@ body {
   background-color: var(--color-player-2);
 }
 
+/* The text will have font-size 40px */
+
 .win > p {
   font-size: 40px;
 }
@@ -94,6 +118,8 @@ body {
 .win2 > p {
   font-size: 40px;
 }
+
+/* Element showing winning object will be 90px */
 
 .win > p:nth-child(2) {
   font-size: 90px;
@@ -103,11 +129,15 @@ body {
   font-size: 90px;
 }
 
+/* Cross will have green color, defined in root, it will take almost whole size of grid-block */
+
 .cross {
   color: var(--color-player-1);
   width: 80%;
   height: 80%;
 }
+
+/* Circle will have red color, defined in root, it will take almost whole size of grid-block */
 
 .circle {
   color: var(--color-player-2);
@@ -115,18 +145,20 @@ body {
   height: 80%;
 }
 
-.tie{
-    height: 70%;
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 25px;
-    border: 2px solid rgba(0, 0, 0, 0.553);
-    background-color: var(--color-tie);
+/* In case of tie this will be displayed, the color defined in root, except background color and length of text it is same as winning */
+
+.tie {
+  height: 70%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px;
+  border: 2px solid rgba(0, 0, 0, 0.553);
+  background-color: var(--color-tie);
 }
 
 .tie > p {
-    font-size: 40px;
+  font-size: 40px;
 }
