@@ -48,9 +48,22 @@ var Logic = function Logic() {
       }
     };
 
+    var del = function del() {
+      if (ElementLocations.p1NameInput.value) {
+        ElementLocations.p1Name.textContent = "X is player 1";
+        ElementLocations.p1NameInput.value = "";
+      }
+
+      if (ElementLocations.p2NameInput.value) {
+        ElementLocations.p2Name.textContent = "O is player 2";
+        ElementLocations.p2NameInput.value = "";
+      }
+    };
+
     return {
       check: check,
-      playerName: playerName
+      playerName: playerName,
+      del: del
     };
   }; // I used here placeContent() and named it positionArr for better readablity
 
@@ -94,6 +107,8 @@ var Logic = function Logic() {
 
 
   var ReadingArr = function ReadingArr() {
+    positionArr = placeContent(); // This array gives event listener to all div's
+
     var _loop = function _loop(i) {
       positionArr[i].addEventListener("click", function () {
         // I use odd or even to know which player moves now and check if that place is empty, then i give appropiate object to the place and make array longer
@@ -121,7 +136,6 @@ var Logic = function Logic() {
       });
     };
 
-    // This array gives event listener to all div's
     for (var i = 0; i < positionArr.length; i += 1) {
       _loop(i);
     }
@@ -137,6 +151,7 @@ var Logic = function Logic() {
   var restart = function restart() {
     ElementLocations.restart.addEventListener("click", function () {
       ElementLocations.board.innerHTML = "<div class=\"spot1\"></div>\n                                          <div class=\"spot2\"></div>\n                                          <div class=\"spot3\"></div>\n                                          <div class=\"spot4\"></div>\n                                          <div class=\"spot5\"></div>\n                                          <div class=\"spot6\"></div>\n                                          <div class=\"spot7\"></div>\n                                          <div class=\"spot8\"></div>\n                                          <div class=\"spot9\"></div>";
+      PlayerNames().del();
     });
   }; // I return ReadingArr to make it public function
 

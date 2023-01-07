@@ -8,7 +8,7 @@ const Logic = () => {
   const placeContent = () => {
     // it is placed inside of array, then through for loop i pushed 9 locations of html div's inside of my array, then returned it
 
-    const placementArr = [];
+    let placementArr = [];
     for (let i = 1; i <= 9; i += 1) {
       const place = ".spot" + i;
       const Htmlplace = document.querySelector(place);
@@ -52,12 +52,22 @@ const Logic = () => {
           ElementLocations.p2NameInput.value;
       }
     };
-    return { check, playerName };
+    const del = () => {
+      if (ElementLocations.p1NameInput.value) {
+        ElementLocations.p1Name.textContent = "X is player 1";
+        ElementLocations.p1NameInput.value = "";
+      }
+      if (ElementLocations.p2NameInput.value) {
+        ElementLocations.p2Name.textContent = "O is player 2";
+        ElementLocations.p2NameInput.value = "";
+      }
+    };
+    return { check, playerName, del };
   };
 
   // I used here placeContent() and named it positionArr for better readablity
 
-  const positionArr = placeContent();
+  let positionArr = placeContent();
 
   // I made round array for measuring through it's length which player plays, i check with it if tie happened, all block are filled
 
@@ -124,10 +134,14 @@ const Logic = () => {
 
   const StateEffect = () => {
     const winP1 = () => {
-      document.body.innerHTML = `<div class="win"><p>${PlayerNames().playerName.P1} has won, congratulations!</p><p>X</p></div>`;
+      document.body.innerHTML = `<div class="win"><p>${
+        PlayerNames().playerName.P1
+      } has won, congratulations!</p><p>X</p></div>`;
     };
     const winP2 = () => {
-      document.body.innerHTML = `<div class="win2"><p>${PlayerNames().playerName.P2} has won, congratulations!</p><p>O</p></div>`;
+      document.body.innerHTML = `<div class="win2"><p>${
+        PlayerNames().playerName.P2
+      } has won, congratulations!</p><p>O</p></div>`;
     };
     const tie = () => {
       document.body.innerHTML = `<div class="tie"><p>Tie!</p></div>`;
@@ -140,6 +154,7 @@ const Logic = () => {
   // ReadingArr is place where i use all my blocks to build my code
 
   const ReadingArr = () => {
+    positionArr = placeContent();
     // This array gives event listener to all div's
 
     for (let i = 0; i < positionArr.length; i += 1) {
@@ -175,7 +190,7 @@ const Logic = () => {
   const start = () => {
     ElementLocations.start.addEventListener("click", () => {
       ReadingArr();
-      PlayerNames().check()
+      PlayerNames().check();
     });
   };
   const restart = () => {
@@ -189,6 +204,7 @@ const Logic = () => {
                                           <div class="spot7"></div>
                                           <div class="spot8"></div>
                                           <div class="spot9"></div>`;
+      PlayerNames().del();
     });
   };
   // I return ReadingArr to make it public function
