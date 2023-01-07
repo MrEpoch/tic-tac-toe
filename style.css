@@ -7,6 +7,7 @@
 :root {
   --color-player-1: #bef264;
   --color-player-2: #ef4444d2;
+  --color-tie: #a1a1aa;
 }
 
 html,
@@ -112,4 +113,20 @@ body {
   color: var(--color-player-2);
   width: 80%;
   height: 80%;
+}
+
+.tie{
+    height: 70%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    border: 2px solid rgba(0, 0, 0, 0.553);
+    background-color: var(--color-tie);
+}
+
+.tie > p {
+    font-size: 40px;
 }
