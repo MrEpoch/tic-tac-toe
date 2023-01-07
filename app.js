@@ -16,7 +16,15 @@ const Logic = () => {
     }
     return placementArr;
   };
-
+  const ElementLocations = {
+    restart: document.querySelector(".restart"),
+    start: document.querySelector(".start"),
+    board: document.querySelector(".board"),
+    p1NameInput: document.querySelector(".player-1-input"),
+    p2NameInput: document.querySelector(".player-2-input"),
+    p1Name: document.querySelector(".player1-namespace-para"),
+    p2Name: document.querySelector(".player2-namespace-para"),
+  };
   // In Object Players there is Player1 and Player2, Player1 is a circle, Player2 is a cross
 
   const Players = {
@@ -26,6 +34,25 @@ const Logic = () => {
     Player2: `<svg class="cross" viewBox="0 0 24 24">
                               <path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
                       </svg>`,
+  };
+
+  const PlayerNames = () => {
+    const playerName = {
+      P1: ElementLocations.p1NameInput.value,
+      P2: ElementLocations.p2NameInput.value,
+    };
+
+    const check = () => {
+      if (ElementLocations.p1NameInput.value) {
+        ElementLocations.p1Name.textContent =
+          ElementLocations.p1NameInput.value;
+      }
+      if (ElementLocations.p2NameInput.value) {
+        ElementLocations.p2Name.textContent =
+          ElementLocations.p2NameInput.value;
+      }
+    };
+    return { check, playerName };
   };
 
   // I used here placeContent() and named it positionArr for better readablity
@@ -89,7 +116,7 @@ const Logic = () => {
       (positionArr[2].innerHTML === Players.Player2 &&
         positionArr[4].innerHTML === Players.Player2 &&
         positionArr[6].innerHTML === Players.Player2);
-    const tie = round.length === 10;
+    const tie = round.length === 9 && Winner1 !== true && Winner2 === true;
     return { Winner1, Winner2, tie };
   };
 
@@ -97,10 +124,10 @@ const Logic = () => {
 
   const StateEffect = () => {
     const winP1 = () => {
-      document.body.innerHTML = `<div class="win"><p>Player 1 has Won, congratulations!</p><p>X</p></div>`;
+      document.body.innerHTML = `<div class="win"><p>${PlayerNames().playerName.P1} has won, congratulations!</p><p>X</p></div>`;
     };
     const winP2 = () => {
-      document.body.innerHTML = `<div class="win2"><p>Player 2 has Won, congratulations!</p><p>O</p></div>`;
+      document.body.innerHTML = `<div class="win2"><p>${PlayerNames().playerName.P2} has won, congratulations!</p><p>O</p></div>`;
     };
     const tie = () => {
       document.body.innerHTML = `<div class="tie"><p>Tie!</p></div>`;
@@ -145,11 +172,34 @@ const Logic = () => {
     }
   };
 
+  const start = () => {
+    ElementLocations.start.addEventListener("click", () => {
+      ReadingArr();
+      PlayerNames().check()
+    });
+  };
+  const restart = () => {
+    ElementLocations.restart.addEventListener("click", () => {
+      ElementLocations.board.innerHTML = `<div class="spot1"></div>
+                                          <div class="spot2"></div>
+                                          <div class="spot3"></div>
+                                          <div class="spot4"></div>
+                                          <div class="spot5"></div>
+                                          <div class="spot6"></div>
+                                          <div class="spot7"></div>
+                                          <div class="spot8"></div>
+                                          <div class="spot9"></div>`;
+    });
+  };
   // I return ReadingArr to make it public function
 
-  return { ReadingArr };
+  return { ReadingArr, ElementLocations, start, restart };
 };
 
 // There i use my Logic()
 
-Logic().ReadingArr();
+const TicTacToe = Logic();
+
+TicTacToe.start();
+
+TicTacToe.restart();

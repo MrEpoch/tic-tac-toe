@@ -16,6 +16,8 @@
   --color-tie: #a1a1aa;
   --color-body-background: #94a3b861;
   --color-board-background: #f1f5f9;
+  --color-bars: rgba(0, 0, 0, 0.553);
+  --color-bars-namespace: #171717;
 }
 
 html,
@@ -35,12 +37,34 @@ body {
   background-color: var(--color-body-background);
 }
 
+input {
+  width: 160px;
+  height: 25px;
+  border-radius: 8px;
+  border: 2px solid var(--color-bars);
+  padding: 6px;
+}
+
+.player1 {
+    position: absolute;
+    left: 3%;
+    top: 30%;
+}
+
+.player2 {
+    position: absolute;
+    right: 7%;
+    top: 30%;
+}
+
+
+
 /* board class is my board on which will be each block, it is grid 3x3, background color is in root*/
 
 .board {
   height: 70%;
   width: 40%;
-  border: 2px solid rgba(0, 0, 0, 0.553);
+  border: 2px solid var(--color-bars);
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   background-color: var(--color-board-background);
@@ -49,7 +73,7 @@ body {
 /* Each board block has thin 1px border, it is centered flex for incoming gaming objects */
 
 .board > div {
-  border: 1px solid rgba(0, 0, 0, 0.553);
+  border: 1px solid var(--color-bars);
   height: 100%;
   width: 100%;
   display: flex;
@@ -65,21 +89,27 @@ body {
 
 /* After and before board is a what objects represents and their color */
 
-.board::after {
+.player2-namespace {
   background-color: var(--color-player-2);
-  content: "O is Player 2";
   font-size: 30px;
   position: absolute;
+  top: 20%;
   right: 100px;
+  border-radius: 3px;
+  border: 2px solid var(--color-bars-namespace);
 }
 
-.board::before {
+.player1-namespace {
+  border-radius: 3px;
   background-color: var(--color-player-1);
-  content: "X is Player 1";
   font-size: 30px;
   position: absolute;
+  top: 20%;
   left: 100px;
+  border: 2px solid var(--color-bars-namespace);
 }
+
+
 
 /* This will be displayed on body element when player 1 won, color in root */
 
@@ -91,7 +121,7 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 25px;
-  border: 2px solid rgba(0, 0, 0, 0.553);
+  border: 2px solid var(--color-bars);
   background-color: var(--color-player-1);
 }
 
@@ -105,7 +135,7 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 25px;
-  border: 2px solid rgba(0, 0, 0, 0.553);
+  border: 2px solid var(--color-bars);
   background-color: var(--color-player-2);
 }
 
@@ -155,10 +185,26 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 25px;
-  border: 2px solid rgba(0, 0, 0, 0.553);
+  border: 2px solid var(--color-bars);
   background-color: var(--color-tie);
 }
 
 .tie > p {
   font-size: 40px;
+}
+
+.btns {
+    position: absolute;
+    bottom: 6%;
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+}
+
+button {
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: 2px solid var(--color-bars);
 }
