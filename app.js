@@ -217,7 +217,7 @@ const Logic = () => {
 
   const restart = () => {
     ElementLocations.restart.addEventListener("click", () => {
-      ElementLocations.board.innerHTML = Clear();
+      ElementLocations.board.innerHTML = Clear().clearing;
       PlayerNames().del();
     });
   };

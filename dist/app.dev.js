@@ -158,7 +158,7 @@ var Logic = function Logic() {
 
   var restart = function restart() {
     ElementLocations.restart.addEventListener("click", function () {
-      ElementLocations.board.innerHTML = Clear();
+      ElementLocations.board.innerHTML = Clear().clearing;
       PlayerNames().del();
     });
   }; // I return ReadingArr to make it public function
