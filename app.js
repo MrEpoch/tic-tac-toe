@@ -16,6 +16,9 @@ const Logic = () => {
     }
     return placementArr;
   };
+
+  // ElementLocations is object holding important element which will be later used
+
   const ElementLocations = {
     restart: document.querySelector(".restart"),
     start: document.querySelector(".start"),
@@ -25,7 +28,8 @@ const Logic = () => {
     p1Name: document.querySelector(".player1-namespace-para"),
     p2Name: document.querySelector(".player2-namespace-para"),
   };
-  // In Object Players there is Player1 and Player2, Player1 is a circle, Player2 is a cross
+
+  // In Object Players there is Player1 and Player2, Player1 is a circle, Player2 is a cross, for visual shapes on board
 
   const Players = {
     Player1: `<svg class="circle" viewBox="0 0 24 24">
@@ -36,10 +40,12 @@ const Logic = () => {
                       </svg>`,
   };
 
+  // PlayerNames functions check looks at input name and assigns it, del deletes it when clicked restart, playerName object saves it for later use
+
   const PlayerNames = () => {
     const playerName = {
-      P1: ElementLocations.p1NameInput.value,
-      P2: ElementLocations.p2NameInput.value,
+      P1: ElementLocations.p1Name.textContent,
+      P2: ElementLocations.p2Name.textContent,
     };
 
     const check = () => {
@@ -65,11 +71,26 @@ const Logic = () => {
     return { check, playerName, del };
   };
 
-  // I used here placeContent() and named it positionArr for better readablity
+  // I used here placeContent() and named it positionArr for better readablity, i wanted it to be constant for safer referencing, but it i must reassign it again in my ReadingArr()
 
   let positionArr = placeContent();
 
-  // I made round array for measuring through it's length which player plays, i check with it if tie happened, all block are filled
+  // Clear is there for situation when user clicks restart button, it will be used later
+
+  const Clear = () => {
+    const clearing = `<div class="spot1"></div>
+                      <div class="spot2"></div>
+                      <div class="spot3"></div>
+                      <div class="spot4"></div>
+                      <div class="spot5"></div>
+                      <div class="spot6"></div>
+                      <div class="spot7"></div>
+                      <div class="spot8"></div>
+                      <div class="spot9"></div>`;
+    return { clearing };
+  };
+
+  // I made round array for measuring through it's length which player plays, i check with it if tie happened, all block are filled and no one won
 
   const round = [];
 
@@ -149,8 +170,6 @@ const Logic = () => {
     return { winP1, winP2, tie };
   };
 
-  // I made round array for measuring through it's length which player plays, it was easier for me to use array then integer
-
   // ReadingArr is place where i use all my blocks to build my code
 
   const ReadingArr = () => {
@@ -161,7 +180,7 @@ const Logic = () => {
       positionArr[i].addEventListener("click", () => {
         // I use odd or even to know which player moves now and check if that place is empty, then i give appropiate object to the place and make array longer
 
-        // Last else is there for case when all is full and i need to make tie, i plan to repair it to make it automatic without setInterval
+        // Last else is there for case when all is full and i need to make tia and no one won
 
         if (round.length % 2 === 0 && positionArr[i].innerHTML === "") {
           round.push("empty");
@@ -169,8 +188,6 @@ const Logic = () => {
         } else if (round.length % 2 !== 0 && positionArr[i].innerHTML === "") {
           round.push("empty");
           positionArr[i].innerHTML = Players.Player2;
-        } else {
-          round.push("empty");
         }
 
         // There i use StateCheck and StateEffect
@@ -187,23 +204,20 @@ const Logic = () => {
     }
   };
 
+  // start function is for what happens when someone clicks on start button, it will start ReadingArr() and if chosen name it will give players names
+
   const start = () => {
     ElementLocations.start.addEventListener("click", () => {
       ReadingArr();
       PlayerNames().check();
     });
   };
+
+  // restart function is for what happens when someone clicks on restart button, it will delete name and position of figures with Clear() and PlayerNames().del()
+
   const restart = () => {
     ElementLocations.restart.addEventListener("click", () => {
-      ElementLocations.board.innerHTML = `<div class="spot1"></div>
-                                          <div class="spot2"></div>
-                                          <div class="spot3"></div>
-                                          <div class="spot4"></div>
-                                          <div class="spot5"></div>
-                                          <div class="spot6"></div>
-                                          <div class="spot7"></div>
-                                          <div class="spot8"></div>
-                                          <div class="spot9"></div>`;
+      ElementLocations.board.innerHTML = Clear();
       PlayerNames().del();
     });
   };
@@ -212,10 +226,14 @@ const Logic = () => {
   return { ReadingArr, ElementLocations, start, restart };
 };
 
-// There i use my Logic()
+// There i use my Logic() and name it as TicTacToe
 
 const TicTacToe = Logic();
 
+// TicTacToe what happens when someone clicks on start button
+
 TicTacToe.start();
+
+// TicTacToe what happens when  someone clicks on restart button
 
 TicTacToe.restart();
