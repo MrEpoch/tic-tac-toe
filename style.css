@@ -115,7 +115,7 @@ input {
   border: 2px solid var(--color-bars-namespace);
 }
 
-/* This will be displayed on body element when player 1 won, color in root */
+/* This will be displayed on board element when player 1 won, color in root */
 
 .win {
   grid-area: 1 / 1 / 4 / 4;
@@ -134,7 +134,7 @@ input {
   background-color: var(--color-player-1) !important;
 }
 
-/* This will be displayed on body element when player 2 won, color in root */
+/* This will be displayed on board element when player 2 won, color in root */
 
 .win2 {
   grid-area: 1 / 1 / 4 / 4;
@@ -192,6 +192,7 @@ input {
 /* In case of tie this will be displayed, the color defined in root, except background color and length of text it is same as winning */
 
 .tie {
+  grid-area: 1 / 1 / 4 / 4;
   height: 70%;
   width: 50%;
   display: flex;
@@ -201,6 +202,10 @@ input {
   padding: 25px;
   border: 2px solid var(--color-bars);
   background-color: var(--color-tie);
+}
+
+.tie:hover {
+  background-color: var(--color-tie)!important;
 }
 
 .tie > p {
