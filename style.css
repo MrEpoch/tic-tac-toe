@@ -118,6 +118,7 @@ input {
 /* This will be displayed on body element when player 1 won, color in root */
 
 .win {
+  grid-area: 1 / 1 / 4 / 4;
   height: 70%;
   width: 50%;
   display: flex;
@@ -129,9 +130,14 @@ input {
   background-color: var(--color-player-1);
 }
 
+.win:hover {
+  background-color: var(--color-player-1) !important;
+}
+
 /* This will be displayed on body element when player 2 won, color in root */
 
 .win2 {
+  grid-area: 1 / 1 / 4 / 4;
   height: 70%;
   width: 50%;
   display: flex;
@@ -141,6 +147,10 @@ input {
   padding: 25px;
   border: 2px solid var(--color-bars);
   background-color: var(--color-player-2);
+}
+
+.win2:hover {
+  background-color: var(--color-player-2) !important;
 }
 
 /* The text will have font-size 40px */

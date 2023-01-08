@@ -60,11 +60,11 @@ const Logic = () => {
     };
     const del = () => {
       if (ElementLocations.p1NameInput.value) {
-        ElementLocations.p1Name.textContent = "X is player 1";
+        ElementLocations.p1Name.textContent = '"X is player 1"';
         ElementLocations.p1NameInput.value = "";
       }
       if (ElementLocations.p2NameInput.value) {
-        ElementLocations.p2Name.textContent = "O is player 2";
+        ElementLocations.p2Name.textContent = '"O is player 2"';
         ElementLocations.p2NameInput.value = "";
       }
     };
@@ -155,17 +155,17 @@ const Logic = () => {
 
   const StateEffect = () => {
     const winP1 = () => {
-      document.body.innerHTML = `<div class="win"><p>${
+      ElementLocations.board.innerHTML = `<div class="win"><p>${
         PlayerNames().playerName.P1
       } has won, congratulations!</p><p>X</p></div>`;
     };
     const winP2 = () => {
-      document.body.innerHTML = `<div class="win2"><p>${
+      ElementLocations.board.innerHTML = `<div class="win2"><p>${
         PlayerNames().playerName.P2
       } has won, congratulations!</p><p>O</p></div>`;
     };
     const tie = () => {
-      document.body.innerHTML = `<div class="tie"><p>Tie!</p></div>`;
+      ElementLocations.board.innerHTML = `<div class="tie"><p>Tie!</p></div>`;
     };
     return { winP1, winP2, tie };
   };
