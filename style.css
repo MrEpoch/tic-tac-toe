@@ -15,7 +15,7 @@
   --color-player-2: #ef4444d2;
   --color-tie: #a1a1aa;
   --color-body-background: #94a3b861;
-  --color-board-background: #f1f5f9;
+  --color-board-background: #d3e5f8;
   --color-bars: rgba(0, 0, 0, 0.553);
   --color-bars-namespace: #171717;
 }
@@ -205,7 +205,7 @@ input {
 }
 
 .tie:hover {
-  background-color: var(--color-tie)!important;
+  background-color: var(--color-tie) !important;
 }
 
 .tie > p {
@@ -225,9 +225,14 @@ input {
 /* All buttons will have border-radius: 10px, border color in root */
 
 button {
+  background-color: var(--color-board-background);
   width: 130px;
   height: 40px;
   border-radius: 10px;
   font-size: 16px;
   border: 2px solid var(--color-bars);
+}
+
+button:hover {
+  background-color: #fff;
 }

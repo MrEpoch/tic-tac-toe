@@ -92,7 +92,7 @@ const Logic = () => {
 
   // I made round array for measuring through it's length which player plays, i check with it if tie happened, all block are filled and no one won
 
-  const round = [];
+  let round = [];
 
   // StateCheck is really long ... , it checks if there is match of circles or crosses or if if tie happened
 
@@ -147,7 +147,7 @@ const Logic = () => {
       (positionArr[2].innerHTML === Players.Player2 &&
         positionArr[4].innerHTML === Players.Player2 &&
         positionArr[6].innerHTML === Players.Player2);
-    const tie = round.length === 9 && Winner1 !== true && Winner2 === true;
+    const tie = round.length === 9 && Winner1 === false && Winner2 === false;
     return { Winner1, Winner2, tie };
   };
 
@@ -189,15 +189,14 @@ const Logic = () => {
           round.push("empty");
           positionArr[i].innerHTML = Players.Player2;
         }
-
+        console.log(round.length);
         // There i use StateCheck and StateEffect
 
         if (StateCheck().Winner1) {
           StateEffect().winP2();
         } else if (StateCheck().Winner2) {
           StateEffect().winP1();
-        }
-        if (StateCheck().tie) {
+        } else if (StateCheck().tie) {
           StateEffect().tie();
         }
       });
@@ -208,8 +207,8 @@ const Logic = () => {
 
   const start = () => {
     ElementLocations.start.addEventListener("click", () => {
-      ReadingArr();
       PlayerNames().check();
+      ReadingArr();
     });
   };
 
@@ -219,6 +218,7 @@ const Logic = () => {
     ElementLocations.restart.addEventListener("click", () => {
       ElementLocations.board.innerHTML = Clear().clearing;
       PlayerNames().del();
+      round = [];
     });
   };
   // I return ReadingArr to make it public function
